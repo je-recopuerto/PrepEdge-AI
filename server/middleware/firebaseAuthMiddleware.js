@@ -9,7 +9,14 @@ const firebaseAuthMiddleware = async (req, res, next) => {
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    req.firebaseUser = decodedToken;
+    const fullUser = await admin.auth().getUser(decodedToken.uid); // ✅ Get full user info
+
+    req.firebaseUser = {
+      uid: decodedToken.uid,
+      email: decodedToken.email,
+      name: fullUser.displayName || "Anonymous", // ✅ Use displayName or fallback
+    };
+
     next();
   } catch (err) {
     return res.status(401).json({ error: "Unauthorized: Invalid token" });

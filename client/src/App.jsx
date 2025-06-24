@@ -1,10 +1,14 @@
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
+
 function App() {
-  return (
-    <>
-      <div className="bg-amber-100 min-w-screen min-h-screen flex items-center justify-center">
-        <span className="text-2xl font-bold text-cyan-500">Welcome to PrepEdge AI</span>
-      </div>
-    </>
-  )
+	return (
+		<div className="min-h-screen bg-white">
+			<Header />
+			<Home />
+			<Footer />
+		</div>
+	);
 }
 export default App;
