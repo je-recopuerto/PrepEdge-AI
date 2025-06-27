@@ -20,7 +20,11 @@ admin.initializeApp({
 
 // Routing
 import authRoutes from "./routes/authRoutes.js";
+import interviewRoutes from "./routes/interview.js";
+
 app.use("/api/auth", authRoutes);
+app.use("/api/interview", interviewRoutes);
+
 
 app.get("/", (req, res) => res.send("PrepEdge AI Backend"));
 
