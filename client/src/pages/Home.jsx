@@ -25,7 +25,7 @@ export default function Home() {
 								<div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
 									<button
 										onClick={() => {
-											navigate("/login");
+											navigate("/interview/setup");
 										}}
 										className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
 									>

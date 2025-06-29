@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaGithub, FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import Header from "../components/Header";
 import Toast from "../components/Toast";
+import { useAuth } from "../context/AuthContext";
 import {
 	auth,
 	googleProvider,
@@ -13,6 +14,8 @@ import {
 import axios from "axios";
 
 function SignUp() {
+	const { user, setUser } = useAuth();
+
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -158,9 +161,12 @@ function SignUp() {
 				}
 			);
 
+			setUser(result.user);
+			console.log("User signed in:", user);
+
 			showToast("Successfully signed in with Google!", "success");
 			setTimeout(() => {
-				navigate("/login");
+				navigate("/");
 			}, 2000);
 		} catch (err) {
 			showToast(

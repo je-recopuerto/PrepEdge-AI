@@ -3,9 +3,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import admin from "firebase-admin";
+import multer from "multer";
 
 dotenv.config();
 const app = express();
+const upload = multer({ dest: "uploads/" });
 app.use(cors());
 app.use(express.json());
 connectDB()
