@@ -7,25 +7,39 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-	const [user, setUser] = useState(null);
-	const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-			if (firebaseUser) {
-				setUser(firebaseUser);
-			} else {
-				setUser(null);
-			}
-			setLoading(false);
-		});
+  const logout = () => {
+    auth.signOut()
+      .then(() => {
+        setUser(null);
+        setIsLoggedIn(false);
+      })
+      .catch((error) => {
+        console.error("Logout failed:", error);
+      });
+  };
 
-		return () => unsubscribe();
-	}, []);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+        setIsLoggedIn(true);
+      } else {
+        setUser(null);
+        setIsLoggedIn(false);
+      }
+      setLoading(false);
+    });
 
-	return (
-		<AuthContext.Provider value={{ user, setUser, loading }}>
-			{children}
-		</AuthContext.Provider>
-	);
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, loading, isLoggedIn, setIsLoggedIn, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
