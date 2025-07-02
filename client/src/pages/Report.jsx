@@ -5,30 +5,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ContentSection from "../components/ContentSection";
 import ReviewQuestion from "../components/QuestionReview";
-
-import {
-	Chart as ChartJS,
-	CategoryScale,
-	LinearScale,
-	BarElement,
-	Title,
-	Tooltip,
-	Legend,
-} from "chart.js";
-
-ChartJS.register(
-	CategoryScale,
-	LinearScale,
-	BarElement,
-	Title,
-	Tooltip,
-	Legend
-);
+import downloadPDF from "../utils/pdfDownload";
 
 export default function InterviewReport() {
 	const navigate = useNavigate();
 	const { interviewId } = useParams();
 	const [report, setReport] = useState(null);
+	const [interview, setInterview] = useState(null);
 
 	useEffect(() => {
 		const fetchReport = async () => {
@@ -37,6 +20,11 @@ export default function InterviewReport() {
 					`${import.meta.env.VITE_API_URL}/api/report/${interviewId}`
 				);
 				setReport(response.data);
+
+				const interviewResponse = await axios.get(
+					`${import.meta.env.VITE_API_URL}/api/interview/${interviewId}`
+				);
+				setInterview(interviewResponse.data);
 			} catch (error) {
 				console.error("Error fetching report:", error);
 			}
@@ -51,6 +39,7 @@ export default function InterviewReport() {
 	const strengths = report ? report.strengths : [];
 	const reviewQuestions = report ? report.answers : [];
 
+	
 	return (
 		<>
 			{report && (
@@ -86,10 +75,7 @@ export default function InterviewReport() {
 						</div>
 
 						<div className="grid grid-cols-1 mb-8">
-							<ContentSection
-								title="Summary"
-								items={summary}
-							/>
+							<ContentSection title="Summary" items={summary} />
 						</div>
 
 						<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -128,7 +114,10 @@ export default function InterviewReport() {
 						</div>
 
 						<div className="flex justify-end space-x-4">
-							<button className="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors">
+							<button
+								onClick={() => downloadPDF({ report, interview })}
+								className="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+							>
 								Download Report
 							</button>
 							<button
