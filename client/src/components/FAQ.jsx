@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 
-export default function FAQAccordion({
+export default function FAQ({
   title = "Frequently Asked Questions",
   subtitle,
   faqs,

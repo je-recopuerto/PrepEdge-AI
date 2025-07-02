@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import { FaUser, FaSignOutAlt, FaChevronDown } from "react-icons/fa"
 import { useAuth } from "../context/AuthContext"
 
-export default function HeaderWithAuth() {
+export default function Header() {
   const { user, isLoggedIn, logout } = useAuth()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef(null)
@@ -58,18 +58,20 @@ export default function HeaderWithAuth() {
               Home
             </Link>
             {isLoggedIn && (
+              <Link to="/interview/setup" className="text-gray-700 hover:text-gray-900 transition-colors">
+              Practice
+            </Link>
+            )}
+            {isLoggedIn && (
               <Link to="/dashboard" className="text-gray-700 hover:text-gray-900 transition-colors">
                 Dashboard
               </Link>
             )}
-            <Link to="/practice" className="text-gray-700 hover:text-gray-900 transition-colors">
-              Practice
-            </Link>
-            <Link to="/resources" className="text-gray-700 hover:text-gray-900 transition-colors">
+            <Link to="/interview/68653eed4e6d5991e4d792d8" className="text-gray-700 hover:text-gray-900 transition-colors">
               Resources
             </Link>
-            <Link to="/community" className="text-gray-700 hover:text-gray-900 transition-colors">
-              Community
+            <Link to="/pricing" className="text-gray-700 hover:text-gray-900 transition-colors">
+              Pricing
             </Link>
           </nav>
 

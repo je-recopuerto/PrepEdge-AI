@@ -3,6 +3,8 @@ import App from "./App";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp"
 import SetupForm from "./pages/CreateInterview";
+import Interview from "./pages/Interview";
+import InterviewReport from "./pages/Report";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -10,6 +12,8 @@ const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
   { path: "/interview/setup", element: <ProtectedRoute><SetupForm /></ProtectedRoute> },
+  { path: "/interview/:interviewId", element: <ProtectedRoute><Interview /></ProtectedRoute> },
+  { path: "/interview/report/:interviewId", element: <ProtectedRoute><InterviewReport /></ProtectedRoute> },
 ]);
 
 export default router;

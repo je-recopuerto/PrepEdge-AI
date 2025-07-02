@@ -31,7 +31,11 @@ export default function Home() {
 									>
 										Get Started
 									</button>
-									<button className="px-8 py-3 bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 rounded-lg font-medium transition-colors">
+									<button 
+									onClick={() => {
+											navigate("/interview/report/68653eed4e6d5991e4d792d8");
+										}}
+									className="px-8 py-3 bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 rounded-lg font-medium transition-colors">
 										Learn More
 									</button>
 								</div>
