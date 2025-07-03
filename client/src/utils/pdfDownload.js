@@ -143,7 +143,7 @@ const downloadPDF = async({report, interview}) => {
   const boxWidth = (contentWidth - 20) / 3;
   let xPos = margin;
 
-  metrics.forEach((metric, index) => {
+  metrics.forEach((metric) => {
     doc.setFillColor(255, 255, 255);
     doc.setDrawColor(...lightGray);
     doc.rect(xPos, y, boxWidth, 20, 'FD');
@@ -163,11 +163,13 @@ const downloadPDF = async({report, interview}) => {
 
   y += 35;
 
+  const toArray = (value) =>
+  Array.isArray(value) ? value : (typeof value === "string" ? [value] : []);
   // Areas for Improvement & Strengths
   const sections = [
     {
       title: "Summary:",
-      items: report.summary || [
+      items: toArray(report.summary) || [
         "You did a great job in the interview, scoring above average.",
         "Your communication skills were impressive, and you handled technical questions well.",
         "However, there are some areas where you can improve to perform even better in future interviews."
@@ -175,14 +177,14 @@ const downloadPDF = async({report, interview}) => {
     },
     {
       title: "Areas for Improvement:",
-      items: report.areaOfImprovement || [
+      items: toArray(report.areaOfImprovement) || [
         "You seemed to be perfectly fine, as our AI did not find any major areas of improvement.",
         "However, you can always improve your problem-solving skills by practicing more coding challenges.",
       ]
     },
     {
       title: "Strengths:",
-      items: report.strengths || [
+      items: toArray(report.strengths) || [
         "You must have been really poor, as our AI did not find any major strengths.",
         "However, you can always improve your communication skills by practicing more mock interviews.",
       ]

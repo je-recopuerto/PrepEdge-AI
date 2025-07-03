@@ -6,6 +6,8 @@ import SetupForm from "./pages/CreateInterview";
 import Interview from "./pages/Interview";
 import InterviewReport from "./pages/Report";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Dashboard from "./pages/Dashboard";
+import NotFound from "./pages/404"; // Assuming you have a 404 page component
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -14,6 +16,7 @@ const router = createBrowserRouter([
   { path: "/interview/setup", element: <ProtectedRoute><SetupForm /></ProtectedRoute> },
   { path: "/interview/:interviewId", element: <ProtectedRoute><Interview /></ProtectedRoute> },
   { path: "/interview/report/:interviewId", element: <ProtectedRoute><InterviewReport /></ProtectedRoute> },
+  { path: "/dashboard", element: <ProtectedRoute><Dashboard /></ProtectedRoute> },
 ]);
 
 export default router;

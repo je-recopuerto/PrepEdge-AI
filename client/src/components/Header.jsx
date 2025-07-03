@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { FaUser, FaSignOutAlt, FaChevronDown } from "react-icons/fa"
@@ -67,7 +65,7 @@ export default function Header() {
                 Dashboard
               </Link>
             )}
-            <Link to="/interview/68653eed4e6d5991e4d792d8" className="text-gray-700 hover:text-gray-900 transition-colors">
+            <Link to="/resources" className="text-gray-700 hover:text-gray-900 transition-colors">
               Resources
             </Link>
             <Link to="/pricing" className="text-gray-700 hover:text-gray-900 transition-colors">

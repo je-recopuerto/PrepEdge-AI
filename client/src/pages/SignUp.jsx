@@ -13,7 +13,7 @@ import {
 } from "../firebase";
 import axios from "axios";
 
-function SignUp() {
+export default function SignUp() {
 	const { user, setUser } = useAuth();
 
 	const [name, setName] = useState("");
@@ -364,5 +364,3 @@ function SignUp() {
 		</div>
 	);
 }
-
-export default SignUp;

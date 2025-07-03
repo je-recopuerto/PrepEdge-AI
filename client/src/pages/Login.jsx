@@ -12,7 +12,7 @@ import {
 } from "../firebase";
 import axios from "axios";
 
-function Login() {
+export default function Login() {
 	const {	user, setUser } = useAuth();
 
 	const [email, setEmail] = useState("");
@@ -314,4 +314,3 @@ function Login() {
 		</div>
 	);
 }
-export default Login;

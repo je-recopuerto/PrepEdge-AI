@@ -226,15 +226,18 @@ router.post("/:interviewId/answer", async (req, res) => {
 		console.log("Summary Text:", summaryText);
 
 		const extractSection = (label) => {
-	const match = summaryText.match(
-		new RegExp(`\\*\\*${label}:\\*\\*\\s*([\\s\\S]*?)(?=\\*\\*|$)`, "i")
-	);
-	return match ? match[1].trim() : "";
-};
+			const match = summaryText.match(
+				new RegExp(
+					`\\*\\*${label}:\\*\\*\\s*([\\s\\S]*?)(?=\\*\\*|$)`,
+					"i"
+				)
+			);
+			return match ? match[1].trim() : "";
+		};
 
-const overall = extractSection("Overall Summary");
-const strengths = extractSection("Strengths");
-const areas = extractSection("Areas of Improvement");
+		const overall = extractSection("Overall Summary");
+		const strengths = extractSection("Strengths");
+		const areas = extractSection("Areas of Improvement");
 
 		console.log("Overall Summary:", overall);
 		console.log("Strengths:", strengths);
@@ -249,6 +252,18 @@ const areas = extractSection("Areas of Improvement");
 
 	await report.save();
 	res.status(201).json({ success: true });
+});
+
+router.get("/", firebaseAuthMiddleware, async (req, res) => {
+	const decodedToken = req.firebaseUser;
+	if (!decodedToken || !decodedToken.uid) {
+		return res.status(401).json({ error: "Unauthorized" });
+	}
+	const user = await User.findOne({
+		firebase_user_id: decodedToken.uid,
+	});
+	const interviews = await Interview.find({ user_id: user._id });
+	res.json(interviews);
 });
 
 export default router;

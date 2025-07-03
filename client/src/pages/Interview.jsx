@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FaMicrophone, FaArrowRight } from "react-icons/fa";
 
-function Interview() {
+export default function Interview() {
   const { interviewId } = useParams();
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -204,5 +204,3 @@ function Interview() {
     </div>
   );
 }
-
-export default Interview;
