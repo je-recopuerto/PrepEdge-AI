@@ -33,7 +33,7 @@ export default function Home() {
 									</button>
 									<button 
 									onClick={() => {
-											navigate("/interview/report/68653eed4e6d5991e4d792d8");
+											navigate("/about");
 										}}
 									className="px-8 py-3 bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 rounded-lg font-medium transition-colors">
 										Learn More
