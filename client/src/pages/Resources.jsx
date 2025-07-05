@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ResourceCard from "../components/ResourceCard";
@@ -6,15 +6,12 @@ import resources from "../data/resourcesData";
 import featuredResources from "../data/featuredResourcesData";
 
 export default function HeroSection() {
-	const navigate = useNavigate();
 	return (
 		<div>
 			<Header />
 			<section className="relative bg-gradient-to-br from-blue-500 via-green-500 to-emerald-600 overflow-hidden min-h-[600px]">
-				{/* Background Pattern */}
 				<div className="absolute inset-0">
 					<div className="absolute inset-0 bg-neutral-950 bg-opacity-10"></div>
-					{/* Subtle geometric pattern */}
 					<div className="absolute inset-0 opacity-5">
 						<svg
 							className="w-full h-full"
@@ -43,7 +40,6 @@ export default function HeroSection() {
 
 				<div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-						{/* Content */}
 						<div className="text-stone-50 order-2 lg:order-1">
 							<div className="max-w-lg">
 								<h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-stone-50">
@@ -115,10 +111,8 @@ export default function HeroSection() {
 							</div>
 						</div>
 
-						{/* Hero Image */}
 						<div className="relative order-1 lg:order-2">
 							<div className="relative z-10">
-								{/* Main illustration container */}
 								<div className="relative bg-white bg-opacity-10 rounded-3xl p-8 backdrop-blur-sm border border-white border-opacity-20">
 									<img
 										src="/hero-image.jpg"
@@ -128,11 +122,9 @@ export default function HeroSection() {
 									/>
 								</div>
 
-								{/* Floating elements */}
 								<div className="absolute -top-4 -right-4 w-20 h-20 bg-white bg-opacity-10 rounded-full backdrop-blur-sm animate-pulse"></div>
 								<div className="absolute -bottom-6 -left-6 w-16 h-16 bg-blue-300 bg-opacity-20 rounded-full backdrop-blur-sm animate-bounce"></div>
 
-								{/* Feature badges */}
 								<div className="absolute -left-4 top-1/4 bg-white bg-opacity-90 rounded-lg p-3 shadow-lg transform -rotate-3 hover:rotate-0 transition-transform">
 									<div className="flex items-center space-x-2">
 										<div className="w-3 h-3 bg-green-500 rounded-full"></div>
@@ -152,7 +144,6 @@ export default function HeroSection() {
 								</div>
 							</div>
 
-							{/* Background decorative elements */}
 							<div className="absolute top-8 right-8 w-32 h-32 bg-gradient-to-br from-teal-300 to-green-300 rounded-full opacity-20 blur-xl"></div>
 							<div className="absolute bottom-8 left-8 w-24 h-24 bg-gradient-to-br from-green-300 to-teal-300 rounded-full opacity-20 blur-xl"></div>
 						</div>

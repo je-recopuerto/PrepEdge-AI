@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { FaUser, FaSignOutAlt, FaChevronDown } from "react-icons/fa"
+import { FaUser, FaSignOutAlt, FaChevronDown, FaBars, FaTimes } from "react-icons/fa"
 import { useAuth } from "../context/AuthContext"
 
 export default function Header() {
   const { user, isLoggedIn, logout } = useAuth()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const dropdownRef = useRef(null)
 
   useEffect(() => {
@@ -30,8 +31,12 @@ export default function Header() {
     setIsDropdownOpen(!isDropdownOpen)
   }
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
   const getInitials = (name) => {
-	if (!name) return "U";
+    if (!name) return "U"
     return name
       .split(" ")
       .map((n) => n[0])
@@ -39,6 +44,20 @@ export default function Header() {
       .toUpperCase()
       .slice(0, 2)
   }
+
+  const NavLinks = () => (
+    <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8">
+      <Link to="/" className="text-gray-700 hover:text-gray-900 transition-colors">Home</Link>
+      <Link to="/about" className="text-gray-700 hover:text-gray-900 transition-colors">About</Link>
+      {isLoggedIn && (
+        <Link to="/interview/setup" className="text-gray-700 hover:text-gray-900 transition-colors">Practice</Link>
+      )}
+      {isLoggedIn && (
+        <Link to="/dashboard" className="text-gray-700 hover:text-gray-900 transition-colors">Dashboard</Link>
+      )}
+      <Link to="/resources" className="text-gray-700 hover:text-gray-900 transition-colors">Resources</Link>
+    </div>
+  )
 
   return (
     <header className="bg-white border-b border-gray-200">
@@ -51,43 +70,24 @@ export default function Header() {
             </Link>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-gray-900 transition-colors">
-              Home
-            </Link>
-            {isLoggedIn && (
-              <Link to="/interview/setup" className="text-gray-700 hover:text-gray-900 transition-colors">
-              Practice
-            </Link>
-            )}
-            {isLoggedIn && (
-              <Link to="/dashboard" className="text-gray-700 hover:text-gray-900 transition-colors">
-                Dashboard
-              </Link>
-            )}
-            <Link to="/resources" className="text-gray-700 hover:text-gray-900 transition-colors">
-              Resources
-            </Link>
-            <Link to="/pricing" className="text-gray-700 hover:text-gray-900 transition-colors">
-              Pricing
-            </Link>
+          <nav className="hidden md:flex">
+            <NavLinks />
           </nav>
 
-          <div className="flex items-center space-x-4">
+          <div className="md:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="text-gray-700 hover:text-gray-900 focus:outline-none"
+            >
+              {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            </button>
+          </div>
+
+          <div className="hidden md:flex items-center space-x-4">
             {!isLoggedIn ? (
               <>
-                <Link
-                  to="/login"
-                  className="px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-                >
-                  Log in
-                </Link>
-                <Link
-                  to="/signup"
-                  className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md font-medium transition-colors"
-                >
-                  Sign up
-                </Link>
+                <Link to="/login" className="px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">Log in</Link>
+                <Link to="/signup" className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md font-medium transition-colors">Sign up</Link>
               </>
             ) : (
               <div className="relative" ref={dropdownRef}>
@@ -97,18 +97,12 @@ export default function Header() {
                 >
                   <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center overflow-hidden">
                     {user?.avatar ? (
-                      <img
-                        src={user.avatar || "/placeholder.svg"}
-                        alt={user.name}
-                        className="w-full h-full object-cover"
-                      />
+                      <img src={user.avatar || "/placeholder.svg"} alt={user.name} className="w-full h-full object-cover" />
                     ) : (
-                      <span className="text-white text-xl font-bold">{user ? getInitials(user.name) : "U"}</span>
+                      <span className="text-white text-xl font-bold">{getInitials(user.email)}</span>
                     )}
                   </div>
-                  <FaChevronDown
-                    className={`w-3 h-3 text-gray-500 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
-                  />
+                  <FaChevronDown className={`w-3 h-3 text-gray-500 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {isDropdownOpen && (
@@ -119,18 +113,11 @@ export default function Header() {
                     </div>
 
                     <div className="py-1">
-                      <Link
-                        to="/profile"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        onClick={() => setIsDropdownOpen(false)}
-                      >
+                      <Link to="/profile" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" onClick={() => setIsDropdownOpen(false)}>
                         <FaUser className="w-4 h-4 mr-3 text-gray-400" />
                         Profile
                       </Link>
-                      <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors text-left"
-                      >
+                      <button onClick={handleLogout} className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors text-left">
                         <FaSignOutAlt className="w-4 h-4 mr-3 text-gray-400" />
                         Logout
                       </button>
@@ -141,6 +128,23 @@ export default function Header() {
             )}
           </div>
         </div>
+
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-2 space-y-2 pb-4">
+            <NavLinks />
+            {!isLoggedIn ? (
+              <div className="space-y-2 pt-2">
+                <Link to="/login" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">Log in</Link>
+                <Link to="/signup" className="block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Sign up</Link>
+              </div>
+            ) : (
+              <div className="space-y-2 pt-2">
+                <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">Profile</Link>
+                <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">Logout</button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </header>
   )

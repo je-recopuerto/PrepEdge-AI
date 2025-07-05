@@ -1,12 +1,10 @@
-"use client"
-
 import { useState } from "react"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 
 export default function FAQ({
   title = "Frequently Asked Questions",
   subtitle,
-  faqs,
+  faqs = [],
   className = "",
   allowMultipleOpen = false,
 }) {
@@ -26,15 +24,13 @@ export default function FAQ({
 
   return (
     <div className={`max-w-4xl mx-auto ${className}`}>
-      {/* Header */}
       {(title || subtitle) && (
         <div className="text-center mb-8">
-          {title && <h2 className="text-3xl font-bold text-gray-900 mb-4">{title}</h2>}
+          {title && <h2 className="text-3xl font-bold text-gray-900">{title}</h2>}
           {subtitle && <p className="text-gray-600 text-lg max-w-2xl mx-auto">{subtitle}</p>}
         </div>
       )}
 
-      {/* FAQ Items */}
       <div className="space-y-4">
         {faqs.map((faq, index) => {
           const isOpen = openItems.includes(index)
@@ -66,6 +62,16 @@ export default function FAQ({
             </div>
           )
         })}
+      </div>
+
+      <div className="mt-12 flex">
+        <p className="text-gray-600 mb-4">Still have questions?</p>
+        <a
+          href="/contact#contact-form"
+          className="inline-flex items-center justify-center ml-3 mb-4 text-blue-500 font-semibold rounded-lg transition-colors"
+        >
+          Contact Us
+        </a>
       </div>
     </div>
   )

@@ -41,12 +41,9 @@ export default function Home() {
 								</div>
 							</div>
 
-							{/* Illustration */}
 							<div className="relative">
 								<div className="relative z-10">
-									{/* Person illustration */}
 									<div className="w-80 h-96 mx-auto relative">
-										{/* Presentation board */}
 										<div className="absolute top-0 right-8 w-32 h-24 bg-white rounded-lg shadow-lg border-4 border-gray-800">
 											<div className="p-2">
 												<div className="w-full h-2 bg-gray-300 rounded mb-1"></div>
@@ -56,23 +53,18 @@ export default function Home() {
 											</div>
 										</div>
 
-										{/* Person */}
 										<div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
-											{/* Head */}
 											<div className="w-16 h-16 bg-amber-700 rounded-full mb-2 mx-auto relative">
 												<div className="w-12 h-8 bg-gray-800 rounded-full absolute -bottom-2 left-1/2 transform -translate-x-1/2"></div>
 											</div>
-											{/* Body */}
 											<div className="w-20 h-24 bg-teal-600 rounded-t-3xl mx-auto relative">
 												<div className="w-16 h-20 bg-white rounded-t-2xl absolute top-2 left-1/2 transform -translate-x-1/2"></div>
 											</div>
-											{/* Legs */}
 											<div className="w-20 h-16 bg-gray-800 rounded-b-2xl mx-auto"></div>
 										</div>
 									</div>
 								</div>
 
-								{/* Decorative elements */}
 								<div className="absolute top-8 left-8 w-16 h-20 bg-green-600 rounded-full opacity-80"></div>
 								<div className="absolute bottom-8 right-4 w-12 h-16 bg-green-700 rounded-full opacity-60"></div>
 								<div className="absolute top-1/2 left-4 w-8 h-10 bg-green-500 rounded-full opacity-70"></div>
@@ -94,7 +86,6 @@ export default function Home() {
 				</div>
 
 				<div className="space-y-16">
-					{/* AI-Powered Questions */}
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 						<div>
 							<h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -114,12 +105,10 @@ export default function Home() {
 						</div>
 					</div>
 
-					{/* Voice Support */}
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 						<div className="order-2 lg:order-1">
 							<div className="bg-gradient-to-br from-orange-50 to-amber-100 rounded-2xl p-8 flex justify-center">
 								<div className="relative">
-									{/* Person with microphone */}
 									<div className="w-32 h-32 bg-amber-600 rounded-full flex items-center justify-center relative">
 										<div className="w-20 h-20 bg-amber-700 rounded-full"></div>
 										<div className="absolute -right-4 bottom-4 w-8 h-12 bg-gray-800 rounded-full flex items-center justify-center">
@@ -140,7 +129,6 @@ export default function Home() {
 						</div>
 					</div>
 
-					{/* Analytics and Insights */}
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 						<div>
 							<h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -200,7 +188,7 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="max-w-7xl mx-auto px-4 py-16">
+			<section className="max-w-7xl mx-auto px-4 py-16 mb-16">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl font-bold text-gray-900 mb-4">
 						What You’ll Get

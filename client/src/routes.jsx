@@ -8,6 +8,8 @@ import InterviewReport from "./pages/Report";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Resources from "./pages/Resources";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -17,7 +19,9 @@ const router = createBrowserRouter([
   { path: "/interview/:interviewId", element: <ProtectedRoute><Interview /></ProtectedRoute> },
   { path: "/interview/report/:interviewId", element: <ProtectedRoute><InterviewReport /></ProtectedRoute> },
   { path: "/dashboard", element: <ProtectedRoute><Dashboard /></ProtectedRoute> },
-  {path: "/resources", element: <Resources /> },
+  { path: "/resources", element: <Resources /> },
+  { path: "/about", element: <About /> },
+  { path: "/contact", element: <Contact /> },
 ]);
 
 export default router;
