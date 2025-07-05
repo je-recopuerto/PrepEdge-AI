@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Home, ArrowLeft } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 
 export default function Animated404() {
   const [isVisible, setIsVisible] = useState(false)
@@ -27,9 +27,9 @@ export default function Animated404() {
         </div>
 
         <div className="mb-8 text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Houston, we have a problem!</h2>
-          <p className="text-xl opacity-90 mb-2">The page you're looking for has drifted into space.</p>
-          <p className="text-lg opacity-75">Let's get you back to safety.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">We have a problem!</h2>
+          <p className="text-xl opacity-90 mb-2">The page you're looking for isn't available.</p>
+          <p className="text-lg opacity-75">Let's get you back to Home.</p>
         </div>
 
         <div className="absolute inset-0 pointer-events-none">
@@ -43,8 +43,7 @@ export default function Animated404() {
             href="/"
             className="px-6 py-3 bg-white text-gray-800 hover:bg-gray-100 shadow-lg rounded-md flex items-center gap-2 text-sm font-medium transition-all duration-200 transform hover:scale-105"
           >
-            <Home className="w-5 h-5" />
-            Return to Earth
+            Return to Home
           </Link>
 
           <Link

@@ -7,7 +7,6 @@ const connectDB = async() => {
             useUnifiedTopology: true,
         });
     } catch (error) {
-        console.error('\n!Database connection error:', error);
         process.exit(1);
     }
 }

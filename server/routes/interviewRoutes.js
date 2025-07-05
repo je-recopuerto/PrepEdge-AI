@@ -28,8 +28,6 @@ router.post(
 					.status(400)
 					.json({ error: "Incomplete form submission" });
 			}
-			console.log("Received form data:", req.body);
-			console.log("Received file:", req.file?.originalname);
 			const {
 				interviewName,
 				numOfQuestions,
@@ -48,7 +46,6 @@ router.post(
 			let resume_link = null;
 			let resume_text = null;
 			if (req.file && req.file.buffer) {
-				console.log("Resume file detected, uploading to Cloudinary...");
 				const streamUpload = () =>
 					new Promise((resolve, reject) => {
 						const stream = cloudinary.uploader.upload_stream(
@@ -69,17 +66,7 @@ router.post(
 				try {
 					const result = await streamUpload();
 					resume_link = result.secure_url;
-					console.log(
-						"-----------\nCloudinary upload succeeded:",
-						resume_link,
-						"\n-----------"
-					);
 				} catch (uploadErr) {
-					console.error(
-						"-----------\nCloudinary upload failed:",
-						uploadErr,
-						"\n-----------"
-					);
 					return res
 						.status(500)
 						.json({ error: "Cloudinary upload failed" });
@@ -90,21 +77,17 @@ router.post(
 
 			let resumeSummary = null;
 			if (resume_text) {
-				console.log("Summarizing resume text...");
 				try {
 					resumeSummary = await summarizeResumeText(resume_text);
-					console.log("Resume resumeSummary:", resumeSummary);
 				} catch (err) {
-					console.error(
-						"Error summarizing resume text:",
-						err.message || err
-					);
+					return res
+						.status(500)
+						.json({ error: "Resume summarization failed" });
 				}
 			}
 
 			let questions;
 			try {
-				console.log("----------\nGenerating questions...");
 				questions = await generateQuestions({
 					num_of_questions: numOfQuestions,
 					interview_type: interviewType,
@@ -116,11 +99,6 @@ router.post(
 					focus_area: focusAt,
 				});
 			} catch (err) {
-				console.error(
-					"-----------\nError in generateQuestions:",
-					Error,
-					"\n-----------"
-				);
 				return res
 					.status(500)
 					.json({ error: "Question generation failed" });
@@ -131,12 +109,6 @@ router.post(
 					.status(400)
 					.json({ error: "Failed to generate questions" });
 			}
-
-			console.log(
-				"-----------\nGenerated questions:",
-				questions,
-				"\n-----------"
-			);
 
 			const interview = new Interview({
 				user_id: user._id,
@@ -159,11 +131,6 @@ router.post(
 				interview,
 			});
 		} catch (err) {
-			console.error(
-				"----------------\nInterview setup error:",
-				err.stack || err.message,
-				"\n----------------"
-			);
 			res.status(500).json({ error: "Failed to set up interview" });
 		}
 	}
@@ -223,8 +190,6 @@ router.post("/:interviewId/answer", async (req, res) => {
 			.join("\n");
 		const summaryText = await interviewSummary(combinedFeedback);
 
-		console.log("Summary Text:", summaryText);
-
 		const extractSection = (label) => {
 			const match = summaryText.match(
 				new RegExp(
@@ -238,10 +203,6 @@ router.post("/:interviewId/answer", async (req, res) => {
 		const overall = extractSection("Overall Summary");
 		const strengths = extractSection("Strengths");
 		const areas = extractSection("Areas of Improvement");
-
-		console.log("Overall Summary:", overall);
-		console.log("Strengths:", strengths);
-		console.log("Areas of Improvement:", areas);
 
 		// Update report with final score, strengths, areas of improvement, and summary
 		report.finalScore = avgScore.toFixed(2);

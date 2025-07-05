@@ -35,10 +35,8 @@ If any category is missing, simply write "Not mentioned".
     });
 
     const summary = res.choices[0].message.content.trim();
-    console.log("✅ Resume Summary:", summary);
     return summary;
   } catch (error) {
-    console.error("❌ Error summarizing resume:", error);
     return "Resume could not be summarized due to an error.";
   }
 }
@@ -118,8 +116,6 @@ Ensure that:
     });
 
     const generatedText = response.choices[0].message.content;
-    // console.log("---------------\nAI response:", generatedText, "\n---------------");
-
     const questions = [];
     const lines = generatedText.split("\n");
     let currentQuestion = null;
@@ -158,7 +154,6 @@ Ensure that:
 
     return questions;
   } catch (error) {
-    // console.error("Error Object:", error);
     throw new Error(
       `Error generating questions: ${error?.message || JSON.stringify(error)}`
     );
@@ -185,7 +180,6 @@ Example:
 `;
 
   try {
-    console.log("🧠 Sending prompt to HuggingFace for answer analysis:", prompt.slice(0, 200));
     const response = await hf.chatCompletion({
       model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
       messages: [{ role: "user", content: prompt }],
@@ -193,8 +187,6 @@ Example:
     });
 
     const generatedText = response.choices[0].message.content;
-    console.log("🟢 Hugging Face response for answer analysis:", generatedText);
-
     const lines = generatedText.split("\n").map(line => line.trim());
     let score = 0;
     let feedback = "Analysis failed to provide feedback";
@@ -213,7 +205,6 @@ Example:
 
     return { score, feedback };
   } catch (error) {
-    console.error("🛑 Raw error object from Hugging Face:", error);
     return { score: 0, feedback: "Analysis failed" };
   }
 };
@@ -235,8 +226,6 @@ ${feedbackText}
 """`;
 
   try {
-    console.log("🧠 Sending prompt to HuggingFace for interview summary:", prompt.slice(0, 200));
-    
     const response = await hf.chatCompletion({
       model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
       messages: [{ role: "user", content: prompt }],
@@ -244,11 +233,9 @@ ${feedbackText}
     });
 
     const generatedText = response.choices[0].message.content;
-    console.log("🟢 Hugging Face response for interview summary:", generatedText);
 
     return generatedText.trim();
   } catch (error) {
-    console.error("❌ Error generating interview summary:", error);
     return "Interview summary could not be generated due to an error.";
   }
 };

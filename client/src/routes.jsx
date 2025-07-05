@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Resources from "./pages/Resources";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Error404 from "./pages/404";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
   { path: "/resources", element: <Resources /> },
   { path: "/about", element: <About /> },
   { path: "/contact", element: <Contact /> },
+  { path: "*", element: <Error404 /> },
 ]);
 
 export default router;
