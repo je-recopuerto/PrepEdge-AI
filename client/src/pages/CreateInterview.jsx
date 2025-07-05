@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import LoadingScreen from "../components/LoadingScreen";
 import { useAuth } from "../context/AuthContext";
 import {
 	FaArrowRight,
@@ -14,7 +15,7 @@ import {
 import Toast from "../components/Toast";
 
 export default function SetupForm() {
-	const { user } = useAuth();
+	const { user, loading, setLoading } = useAuth();
 	const [currentStep, setCurrentStep] = useState(1);
 	const [isTransitioning, setIsTransitioning] = useState(false);
 	const [drag, setDrag] = useState(false);
@@ -124,6 +125,7 @@ export default function SetupForm() {
 			console.error("❌ User is null in CreateInterview.jsx");
 			return;
 		}
+		setLoading(true);
 		const token = await user.getIdToken();
 		 console.log("-------\nToken being sent to backend:", token, "\n-------");
 
@@ -157,8 +159,18 @@ export default function SetupForm() {
 				"\n------"
 			);
 			showToast("Something went wrong", "error");
+		} finally {
+			setLoading(false);
 		}
 	};
+
+	if (loading) {
+		return (
+			<LoadingScreen
+				message="Setting up your interview..."
+			/>
+		);
+	}
 
 	return (
 		<>

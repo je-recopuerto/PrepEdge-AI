@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FAQ from "../components/FAQ";
 import ContactForm from "../components/ContactForm";
-import ContactInfo from "../components/ContactInfo";
 import faqData from "../data/faqData";
 
 export default function Contact() {

@@ -4,6 +4,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import Toast from "../components/Toast";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import LoadingScreen from "../components/LoadingScreen";
+import { useAuth } from "../context/AuthContext";
+
 import { FaMicrophone, FaArrowRight } from "react-icons/fa";
 
 const SpeechRecognition =
@@ -22,6 +25,7 @@ export default function Interview() {
 		message: "",
 		type: "success",
 	});
+	const { loading, setLoading } = useAuth();
 	const navigate = useNavigate();
 
 	const showToast = (message, type) => {
@@ -123,6 +127,7 @@ export default function Interview() {
 
 	const submitAnswer = async () => {
 		try {
+			setLoading(true);
 			await axios.post(
 				`${
 					import.meta.env.VITE_API_URL
@@ -144,11 +149,17 @@ export default function Interview() {
 			}
 		} catch (err) {
 			showToast(err.message || "Failed to submit answer.", "error");
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	const totalTimeFormatted = formatTotalTime(totalTime);
 	const currentQuestion = questions[currentQuestionIndex];
+
+	if (loading) {
+		return <LoadingScreen message="Analyzing your Answer..." showProgress />;
+	}
 
 	return (
 		<div className="min-h-screen bg-gray-50">
