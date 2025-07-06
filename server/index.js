@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 const upload = multer({ dest: "uploads/" });
 app.use(cors({
-  origin: 'https://prepedgeai.vercel.app/',
+  origin: 'https://prepedgeai.vercel.app',
   credentials: true,
 }));
 app.use(express.json());
