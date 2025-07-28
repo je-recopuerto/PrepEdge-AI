@@ -9,6 +9,14 @@
 
 ---
 
+# NOTICE FOR GSSoC 2025 Contributors
+
+This repository is officially the part of GSSoC 2025, but the contributions are not just yet allowed on this repository. Please Do Not raise issuees yet, and keep looking at Discord for updates.  
+Contributions will begin soon.  
+Thankyou for showing your interest. 
+
+---
+
 <h3><b>📚 Table of Contents </b></h3>
 <ol>
   <samp>
