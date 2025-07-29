@@ -1,3 +1,8 @@
+/*
+ * @license MIT License
+ * Copyright (c) 2025 Abhinav Mishra
+ */
+
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
 
