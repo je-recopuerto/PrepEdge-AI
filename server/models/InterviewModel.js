@@ -1,3 +1,8 @@
+/*
+ * @license MIT License
+ * Copyright (c) 2025 Abhinav Mishra
+ */
+
 import mongoose from "mongoose";
 
 const interviewSchema = new mongoose.Schema({
