@@ -86,56 +86,56 @@ export default function About() {
 		<div className="min-h-screen bg-white">
 			<Header />
 			<section className="py-16 lg:py-20 bg-gradient-to-br from-white via-blue-50 to-green-50">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-						<div>
-							<div className="text-sm font-medium text-blue-600 mb-4 uppercase tracking-wide">
-								About Us
-							</div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="order-1 md:order-1">
+                <div className="text-sm font-medium text-blue-600 mb-4 uppercase tracking-wide">
+                    About Us
+                </div>
 
-							<h1 className="text-4xl lg:text-5xl mb-6 font-bold text-gray-900 leading-tight">
-								Empowering Your Interview Success
-							</h1>
+                <h1 className="text-4xl lg:text-5xl mb-6 font-bold text-gray-900 leading-tight">
+                    Empowering Your Interview Success
+                </h1>
 
-							<p className="text-xl text-gray-600 font-medium leading-relaxed mb-8">
-								PrepEdge AI is a cutting-edge platform designed
-								to revolutionize interview preparation. Our
-								mission is to empower job seekers with the tools
-								and resources they need to succeed in today's
-								competitive job market. We leverage advanced AI
-								technology to provide personalized feedback,
-								realistic simulations, and comprehensive
-								learning materials.
-							</p>
+                <p className="text-xl text-gray-600 font-medium leading-relaxed mb-8">
+                    PrepEdge AI is a cutting-edge platform designed
+                    to revolutionize interview preparation. Our
+                    mission is to empower job seekers with the tools
+                    and resources they need to succeed in today's
+                    competitive job market. We leverage advanced AI
+                    technology to provide personalized feedback,
+                    realistic simulations, and comprehensive
+                    learning materials.
+                </p>
 
-							<div className="flex flex-col sm:flex-row gap-6">
-								<Link
-									to="/signup"
-									className="inline-flex items-center justify-center px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
-								>
-									Get Started
-									<FaArrowRight className="ml-2" />
-								</Link>
+                <div className="flex flex-col sm:flex-row gap-6">
+                    <Link
+                        to="/signup"
+                        className="inline-flex items-center justify-center px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+                    >
+                        Get Started
+                        <FaArrowRight className="ml-2" />
+                    </Link>
 
-								<a
-									href="#what-is"
-									className="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold rounded-lg transition-colors"
-								>
-									Learn More
-								</a>
-							</div>
-						</div>
+                    <a
+                        href="#what-is"
+                        className="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold rounded-lg transition-colors"
+                    >
+                        Learn More
+                    </a>
+                </div>
+            </div>
 
-						<div className="h-64 lg:h-[500px] flex items-center justify-center">
-							<img
-								src="/about.png"
-								alt=""
-								className="w-full h-auto"
-							/>
-						</div>
-					</div>
-				</div>
-			</section>
+            <div className="order-2 md:order-2 h-64 md:h-80 lg:h-[400px] flex items-center justify-center">
+                <img
+                    src="/about.png"
+                    alt="PrepEdge AI platform illustration"
+                    className="w-full h-full object-contain max-w-sm md:max-w-md lg:max-w-lg"
+                />
+            </div>
+        </div>
+    </div>
+</section>
 
 			<section id="what-is" className="py-16 lg:py-20 bg-white">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
