@@ -1,3 +1,8 @@
+/*
+ * @license MIT License
+ * Copyright (c) 2025 Abhinav Mishra
+ */
+
 import express from "express";
 import Interview from "../models/InterviewModel.js";
 import Report from "../models/ReportModel.js";
