@@ -1,3 +1,8 @@
+/*
+ * @license MIT License
+ * Copyright (c) 2025 Abhinav Mishra
+ */
+
 import express from "express";
 import Report from "../models/ReportModel.js";
 import firebaseAuthMiddleware from "../middleware/firebaseAuthMiddleware.js";
