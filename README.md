@@ -5,7 +5,7 @@
   🔗 <a href="https://prepedgeai.vercel.app"><b>Live Demo → prepedgeai.vercel.app</b></a>
 </p>
 
-![Render](https://img.shields.io/badge/Backend-Render-blue) ![Vercel](https://img.shields.io/badge/Frontend-Vercel-black) ![Status](https://img.shields.io/badge/status-active-brightgreen)
+![Render](https://img.shields.io/badge/Backend-Render-blue) ![Vercel](https://img.shields.io/badge/Frontend-Vercel-black) ![Status](https://img.shields.io/badge/status-active-brightgreen) ![GSSoC 2025](https://img.shields.io/badge/-GSSoC_2025-orange)
 
 ---
 
@@ -96,8 +96,8 @@
     <br>
     <b>PrepEdge</b> is proudly part of <b>GirlScript Summer of Code (GSSoC) 2025</b>, a nationwide open-source program aimed at encouraging more developers to contribute to meaningful projects.  <br><br>
     We welcome <b>all contributions</b>—whether you're a beginner or an experienced developer! To get started:  <br>
-    - 📘 <b>Read our [`LEARN.md`](./LEARN.md)</b> to understand the project structure, features, and setup.  <br>
-    - 📜 <b>Review the [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)</b> to ensure a positive, respectful, and inclusive environment.  <br><br>
+    - 📘 <b>Read our <a href="./LEARN.md"> LEARN.md </a></b> to understand the project structure, features, and setup.  <br>
+    - 📜 <b>Review the <a href="./CODE_OF_CONDUCT.md"> CODE_OF_CONDUCT.md </a></b> to ensure a positive, respectful, and inclusive environment.  <br><br>
     We encourage you to explore issues, submit pull requests, and be a part of building a smart, AI-driven interview preparation platform.   <br>
     If you’d like to improve a feature or fix a bug:  
   
