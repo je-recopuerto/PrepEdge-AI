@@ -9,14 +9,6 @@
 
 ---
 
-# NOTICE FOR GSSoC 2025 Contributors
-
-This repository is officially the part of GSSoC 2025, but the contributions are not just yet allowed on this repository. Please Do Not raise issuees yet, and keep looking at Discord for updates.  
-Contributions will begin soon.  
-Thankyou for showing your interest. 
-
----
-
 <h3><b>📚 Table of Contents </b></h3>
 <ol>
   <samp>
@@ -24,7 +16,7 @@ Thankyou for showing your interest.
     <li> <a href='#features'> Features </a> </li>
     <li> <a href='#tech-stack'> Tech Stack </a> </li>
     <li> <a href='#demo-screenshots'> Screenshots </a> </li>
-    <li> <a href='#contributions'> Contribution </a> </li>
+    <li> <a href='#contributions'> GSSoC Contribution </a> </li>
     <li> <a href='#author'> Author </a> </li>
   </samp>
 </ol>
@@ -102,19 +94,26 @@ Thankyou for showing your interest.
 <p> 
     <b> Contributions are Welcome! </b>
     <br>
-    If you’d like to improve a feature or fix a bug:
+    <b>PrepEdge</b> is proudly part of <b>GirlScript Summer of Code (GSSoC) 2025</b>, a nationwide open-source program aimed at encouraging more developers to contribute to meaningful projects.  <br><br>
+    We welcome <b>all contributions</b>—whether you're a beginner or an experienced developer! To get started:  <br>
+    - 📘 <b>Read our [`LEARN.md`](./LEARN.md)</b> to understand the project structure, features, and setup.  <br>
+    - 📜 <b>Review the [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)</b> to ensure a positive, respectful, and inclusive environment.  <br><br>
+    We encourage you to explore issues, submit pull requests, and be a part of building a smart, AI-driven interview preparation platform.   <br>
+    If you’d like to improve a feature or fix a bug:  
   
     - Fork the repo 
+    - Find and Report the issue
+    - Wait for us to assign that issue to you
     - Create a new branch (git checkout -b feature-xyz) 
     - Make your changes 
     - Push and open a PR 
     
-   ⚠️ Please ensure code is clean, readable, and follows the existing architecture.
+   ⚠️ Please ensure code is clean, readable, and follows the existing architecture.  
+
+   Happy contributing! 💻✨   
 </p>
 
 ---
 
 <h2 id='author'> 6. Author ✍️ </h2>
 <h3><samp>Abhinav Mishra – <a href="https://github.com/CoderUzumaki">@CoderUzumaki</a></samp></h3>
-
----
