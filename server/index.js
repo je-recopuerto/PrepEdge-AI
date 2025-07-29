@@ -1,3 +1,8 @@
+/*
+ * @license MIT License
+ * Copyright (c) 2025 Abhinav Mishra
+ */
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
