@@ -3,8 +3,8 @@ name: Documentation report
 about: Use this template to report outdated, missing, unclear, or incorrect documentation
   in the project.
 title: "[DOC] <your issue title>"
-labels: documentation
-assignees: CoderUzumaki, hudazaan, RedK22
+labels: ''
+assignees: ''
 
 ---
 
