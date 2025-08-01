@@ -76,9 +76,7 @@ export default function ResourceCard({
 
   if (link) {
     return (
-      // <Link to={link} className="block">
-      //   {cardContent}
-      // </Link>
+
       <a href={link} target="_blank" rel="noopener noreferrer" className="block">
          {cardContent}
       </a>
