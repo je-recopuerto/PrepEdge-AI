@@ -2,8 +2,8 @@
 name: UI/UX Suggestion
 about: Suggest improvements to the user interface or user experience
 title: "[UI/UX] <Your suggestion title here>"
-labels: ui/ux
-assignees: CoderUzumaki, hudazaan, RedK22
+labels: ''
+assignees: ''
 
 ---
 

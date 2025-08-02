@@ -2,8 +2,8 @@
 name: Bug report
 about: Create a report to help us improve
 title: "[BUG] <your bug report title here>"
-labels: bug
-assignees: CoderUzumaki, hudazaan, RedK22
+labels: ''
+assignees: ''
 
 ---
 

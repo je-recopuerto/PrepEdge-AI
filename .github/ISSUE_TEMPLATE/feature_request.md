@@ -2,8 +2,8 @@
 name: Feature request
 about: Suggest an idea for this project
 title: "[FEAT] <your feature request title here>"
-labels: enhancement
-assignees: CoderUzumaki, hudazaan, RedK22
+labels: ''
+assignees: ''
 
 ---
 
