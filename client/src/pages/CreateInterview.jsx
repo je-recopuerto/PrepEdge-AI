@@ -308,6 +308,7 @@ export default function SetupForm() {
 									<div className="flex justify-end mt-8">
 										<button
 											onClick={handleNext}
+											disabled={formData.interviewName === ""}
 											className={`px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center space-x-2 ${formData.interviewName==="" ? "cursor-not-allowed opacity-50" :""}`}
 										>
 											<span>Next</span>
@@ -449,6 +450,7 @@ export default function SetupForm() {
 										</button>
 										<button
 											onClick={handleNext}
+											disabled={(formData.jobDescription==="") || (formData.companyDescription==="") || (formData.companyName==="") || (formData.role==="")}
 											className={`px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center space-x-2 ${((formData.jobDescription==="") || (formData.companyDescription==="") || (formData.companyName==="") || (formData.role===""))? "cursor-not-allowed opacity-50" :""}`}
 										>
 											<span>Next</span>
@@ -582,6 +584,7 @@ export default function SetupForm() {
 										</button>
 										<button
 											onClick={handleSubmit}
+											disabled={(formData.focusAt==="") || (!formData.resume)}
 											className={`px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors ${((formData.focusAt==="") || (!formData.resume)) ? "cursor-not-allowed opacity-50" :""}`}
 										>
 											Start Interview
