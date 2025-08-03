@@ -17,12 +17,14 @@ export default function Footer() {
 					>
 						Contact Us
 					</Link>
-					<Link
-						to="https://github.com/CoderUzumaki/prepedge-ai"
+					<a
+						href="https://github.com/coderuzumaki/prepedge-ai"
+						target="_blank"
+						rel="noopener noreferrer"
 						className="text-blue-600 hover:text-blue-700 transition-colors flex items-center"
 					>
 						GitHub
-					</Link>
+					</a>
 				</div>
 				<div className="text-center mt-8 ">
 					<p className="text-gray-600">
