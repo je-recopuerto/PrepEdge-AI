@@ -254,7 +254,7 @@ export default function About() {
 						</p>
 						<div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
 							<a
-								href="https://github.com/yourusername/prepedge-ai"
+								href="https://github.com/coderuzumaki/prepedge-ai"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-gray-600 border-2 text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
