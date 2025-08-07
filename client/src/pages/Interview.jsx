@@ -9,6 +9,11 @@ import { useAuth } from "../context/AuthContext";
 
 import { FaMicrophone, FaArrowRight } from "react-icons/fa";
 
+//new feature imports
+import { analyzeSpeech } from "../utils/speechAnalysis";
+import ConfidenceHeatmap from "../components/ConfidenceHeatmap";
+
+
 const SpeechRecognition =
 	window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = SpeechRecognition ? new SpeechRecognition() : null;
@@ -25,6 +30,12 @@ export default function Interview() {
 		message: "",
 		type: "success",
 	});
+
+	// new feature states
+const [transcriptWords, setTranscriptWords] = useState([]);
+const [analyzedWords, setAnalyzedWords] = useState([]);
+
+
 	const { loading, setLoading } = useAuth();
 	const navigate = useNavigate();
 
@@ -107,20 +118,52 @@ export default function Interview() {
 			setIsRecording(false);
 		};
 
-		recognition.onresult = (event) => {
-			let interimTranscript = "";
+		// recognition.onresult = (event) => {
+		// 	let interimTranscript = "";
 
-			for (let i = event.resultIndex; i < event.results.length; i++) {
-				const transcript = event.results[i][0].transcript;
-				if (event.results[i].isFinal) {
-					finalTranscript += transcript + " ";
-				} else {
-					interimTranscript += transcript;
-				}
-			}
+		// 	for (let i = event.resultIndex; i < event.results.length; i++) {
+		// 		const transcript = event.results[i][0].transcript;
+		// 		if (event.results[i].isFinal) {
+		// 			finalTranscript += transcript + " ";
+		// 		} else {
+		// 			interimTranscript += transcript;
+		// 		}
+		// 	}
 			
-			setAnswer(answer + finalTranscript + interimTranscript);
-		};
+		// 	setAnswer(answer + finalTranscript + interimTranscript);
+		// };
+
+recognition.onresult = (event) => {
+  let newWords = [];
+
+  for (let i = event.resultIndex; i < event.results.length; i++) {
+    const result = event.results[i];
+    const transcript = result[0].transcript;
+    const confidence = result[0].confidence;
+
+    // Break into words and assign fake timestamps (since Web Speech API lacks timing)
+    const words = transcript.trim().split(/\s+/);
+    const baseTime = Date.now() / 1000;
+
+    words.forEach((word, idx) => {
+      newWords.push({
+        word,
+        confidence,
+        time: baseTime + idx * 0.4, // simulate time per word
+      });
+    });
+  }
+
+  setTranscriptWords((prev) => {
+    const combined = [...prev, ...newWords];
+    setAnalyzedWords(analyzeSpeech(combined));
+    return combined;
+  });
+
+  setAnswer((prev) => prev + " " + newWords.map(w => w.word).join(" "));
+};
+
+
 
 		recognition.start();
 	};
@@ -205,6 +248,11 @@ export default function Interview() {
 								placeholder="Type your answer here..."
 								className="w-full h-40 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none text-gray-700 placeholder-gray-400"
 							/>
+
+
+{/* new heatmap component below the textarea */}
+							<ConfidenceHeatmap analyzedWords={analyzedWords} />
+
 						</div>
 
 						<div className="flex justify-between items-center">

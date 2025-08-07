@@ -23,7 +23,10 @@ connectDB()
     .catch((error) => console.error("Database connection failed:", error));
     
 // Initializing Firebase Admin SDK
-var serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);   
+// var serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT.replace(/\\n/g, '\n'));   
+import fs from 'fs';
+const serviceAccount = JSON.parse(fs.readFileSync('./config/firebaseServiceAccountKey.json', 'utf8'));
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
