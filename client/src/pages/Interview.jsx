@@ -14,9 +14,13 @@ import { analyzeSpeech } from "../utils/speechAnalysis";
 import ConfidenceHeatmap from "../components/ConfidenceHeatmap";
 
 
+
+
+
 const SpeechRecognition =
 	window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = SpeechRecognition ? new SpeechRecognition() : null;
+
 
 export default function Interview() {
 	const { interviewId } = useParams();
@@ -34,6 +38,7 @@ export default function Interview() {
 	// new feature states
 const [transcriptWords, setTranscriptWords] = useState([]);
 const [analyzedWords, setAnalyzedWords] = useState([]);
+const [stats, setStats] = useState(null);
 
 
 	const { loading, setLoading } = useAuth();
@@ -89,6 +94,7 @@ const [analyzedWords, setAnalyzedWords] = useState([]);
 		};
 	};
 
+
 	const startRecording = () => {
 		if (!recognition) {
 			showToast(
@@ -132,16 +138,17 @@ const [analyzedWords, setAnalyzedWords] = useState([]);
 			
 		// 	setAnswer(answer + finalTranscript + interimTranscript);
 		// };
-
 recognition.onresult = (event) => {
   let newWords = [];
 
   for (let i = event.resultIndex; i < event.results.length; i++) {
     const result = event.results[i];
+    
+    if (!result.isFinal) continue; // Only process finalized results
+
     const transcript = result[0].transcript;
     const confidence = result[0].confidence;
 
-    // Break into words and assign fake timestamps (since Web Speech API lacks timing)
     const words = transcript.trim().split(/\s+/);
     const baseTime = Date.now() / 1000;
 
@@ -154,14 +161,19 @@ recognition.onresult = (event) => {
     });
   }
 
+  if (newWords.length === 0) return;
+
   setTranscriptWords((prev) => {
     const combined = [...prev, ...newWords];
-    setAnalyzedWords(analyzeSpeech(combined));
+    const { analyzedWords, stats } = analyzeSpeech(combined);
+    setAnalyzedWords(analyzedWords);
+    setStats(stats); // assuming you have a `stats` state variable
     return combined;
   });
 
   setAnswer((prev) => prev + " " + newWords.map(w => w.word).join(" "));
 };
+
 
 
 
@@ -183,9 +195,18 @@ recognition.onresult = (event) => {
 
 			if (currentQuestionIndex < questions.length - 1) {
 				const nextIndex = currentQuestionIndex + 1;
-				setCurrentQuestionIndex(nextIndex);
-				setAnswer("");
-				speakQuestion(questions[nextIndex].question);
+				// setCurrentQuestionIndex(nextIndex);
+				// setAnswer("");
+				// speakQuestion(questions[nextIndex].question);
+			  setCurrentQuestionIndex(nextIndex);
+              setAnswer("");
+              setTranscriptWords([]);
+              setAnalyzedWords([]);
+              setStats(null);
+              speakQuestion(questions[nextIndex].question);
+
+
+			
 			} else {
 				showToast("Interview Completed!", "success");
 				navigate(`/interview/report/${interviewId}`);
@@ -242,16 +263,31 @@ recognition.onresult = (event) => {
 						</div>
 
 						<div className="mb-6">
-							<textarea
+							 <textarea
+							 disabled={isRecording}
 								value={answer}
 								onChange={(e) => setAnswer(e.target.value)}
 								placeholder="Type your answer here..."
 								className="w-full h-40 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none text-gray-700 placeholder-gray-400"
-							/>
+							/> 
 
 
 {/* new heatmap component below the textarea */}
-							<ConfidenceHeatmap analyzedWords={analyzedWords} />
+{!isRecording && analyzedWords.length > 0 && (
+  <ConfidenceHeatmap analyzedWords={analyzedWords} />
+)}
+
+
+{/* confidence summary */}
+{!isRecording && stats && (
+  <div className="mt-4 p-4 border rounded bg-gray-100 text-sm text-gray-800">
+    <div><strong>Filler Words:</strong> {stats.fillerCount}</div>
+    <div><strong>Long Pauses:</strong> {stats.pauseCount}</div>
+    <div><strong>Low-Confidence Words:</strong> {stats.lowConfidenceCount}</div>
+    {/* <div><strong>Average Confidence:</strong> {stats.averageConfidence}%</div> */}
+	<div><strong>Confidence Level:</strong> {stats.confidenceLevel}</div>
+  </div>
+)}
 
 						</div>
 
