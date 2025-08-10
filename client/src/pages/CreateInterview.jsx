@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import LoadingScreen from "../components/LoadingScreen";
 import { useAuth } from "../context/AuthContext";
 import {
@@ -174,7 +172,6 @@ export default function SetupForm() {
 
 	return (
 		<>
-			<Header />
 			{toast.show && (
 				<Toast
 					message={toast.message}
@@ -596,7 +593,6 @@ export default function SetupForm() {
 					</div>
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 }

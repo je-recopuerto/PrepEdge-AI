@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGithub, FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
-import Header from "../components/Header";
 import Toast from "../components/Toast";
 import { useAuth } from "../context/AuthContext";
 import {
@@ -178,7 +177,6 @@ export default function SignUp() {
 
 	return (
 		<div className="min-h-screen bg-gray-50 min-w-screen">
-			<Header />
 			{toast.show && (
 				<Toast
 					message={toast.message}
