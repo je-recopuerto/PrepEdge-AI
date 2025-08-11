@@ -15,7 +15,6 @@ import {
 	FaCodeBranch,
 	FaHeart,
 } from "react-icons/fa";
-import Header from "../components/Header";
 
 export default function About() {
 	const features = [
@@ -84,7 +83,6 @@ export default function About() {
 	];
 	return (
 		<div className="min-h-screen bg-white">
-			<Header />
 			<section className="py-16 lg:py-20 bg-gradient-to-br from-white via-blue-50 to-green-50">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
