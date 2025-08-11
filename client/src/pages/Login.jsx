@@ -160,7 +160,7 @@ export default function Login() {
 
 			const idToken = await result.user.getIdToken();
 			await axios.post(
-				`${import.meta.env.VITE_API_URL}/api/auth/register`,
+				`${import.meta.env.VITE_API_URL}/api/auth/login`,
 				{},
 				{
 					headers: {
@@ -177,7 +177,9 @@ export default function Login() {
 			}, 2000);
 		} catch (error) {
 			console.error("GitHub login failed:", error);
-			showToast(error.message || "GitHub login failed", "error");
+			setTimeout(() => {
+				navigate("/");
+			}, 2000);
 		}
 	};
 

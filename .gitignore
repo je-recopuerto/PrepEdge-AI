@@ -28,5 +28,3 @@ tmp/
 *.tgz
 *.lock
 .env
-.env
-.git

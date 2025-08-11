@@ -205,7 +205,10 @@ export default function SignUp() {
 			}, 2000);
 		} catch (error) {
 			console.error("GitHub login failed:", error);
-			showToast(error.message || "GitHub login failed", "error");
+			// showToast(error.message || "GitHub login failed", "error");
+			setTimeout(() => {
+				navigate("/");
+			}, 2000);
 		}
 	};
 
