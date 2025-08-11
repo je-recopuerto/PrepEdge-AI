@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SiX } from "react-icons/si";
 import { FaGithub, FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
@@ -17,7 +18,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://github.com"
+                href="https://github.com/coderuzumaki/prepedge-ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-900 hover:text-cyan-500 transition-colors duration-200"
@@ -26,16 +27,16 @@ export default function Footer() {
                 <FaGithub className="h-7 w-7" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://x.com/coderUzumaki"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-900 hover:text-cyan-500 transition-colors duration-200"
                 aria-label="Twitter"
               >
-                <FaTwitter className="h-7 w-7" />
+                <SiX className="h-6 w-6 mt-0.5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/abhinavvv08"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-900 hover:text-cyan-500 transition-colors duration-200"
@@ -44,7 +45,7 @@ export default function Footer() {
                 <FaLinkedin className="h-7 w-7" />
               </a>
               <a
-                href="https://www.gmail.com"
+                href="mailto:astar1013vt@gmail.com"
                 className="text-gray-900 hover:text-cyan-500 transition-colors duration-200"
                 aria-label="Email"
               >
