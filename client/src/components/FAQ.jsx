@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"
+import { Link } from "react-router-dom";
 
 export default function FAQ({
   title = "Frequently Asked Questions",
@@ -39,7 +40,7 @@ export default function FAQ({
             <div key={index} className="border border-gray-200 rounded-lg bg-white">
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset rounded-lg"
+                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset rounded-lg cursor-pointer"
                 aria-expanded={isOpen}
               >
                 <span className="text-gray-900 font-medium text-sm md:text-base pr-4">
@@ -66,12 +67,13 @@ export default function FAQ({
 
       <div className="mt-12 flex">
         <p className="text-gray-600 mb-4">Still have questions?</p>
-        <a
-          href="/contact#contact-form"
-          className="inline-flex items-center justify-center ml-3 mb-4 text-blue-500 font-semibold rounded-lg transition-colors"
-        >
-          Contact Us
-        </a>
+        
+        <Link
+						to="/contact#contact-form"
+						className="inline-flex items-center justify-center ml-3 mb-4 text-blue-500 font-semibold rounded-lg transition-colors"
+					>
+						Contact Us
+					</Link>
       </div>
     </div>
   )

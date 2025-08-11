@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import LoadingScreen from "../components/LoadingScreen";
 import { useAuth } from "../context/AuthContext";
 import {
@@ -36,7 +34,7 @@ export default function SetupForm() {
 		numOfQuestions: 3,
 		interviewType: "Technical",
 		role: "",
-		experienceLevel: "fresher",
+		experienceLevel: "Fresher",
 		companyName: "",
 		companyDescription: "",
 		jobDescription: "",
@@ -175,7 +173,6 @@ export default function SetupForm() {
 
 	return (
 		<>
-			<Header />
 			{toast.show && (
 				<Toast
 					message={toast.message}
@@ -240,7 +237,7 @@ export default function SetupForm() {
 													)
 												}
 												placeholder="e.g. Frontend Role at Google"
-												className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+												className={`w-full px-4 py-3 border ${formData.interviewName!==""? "border-gray-300" : "border-red-500"} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
 											/>
 										</div>
 
@@ -292,7 +289,7 @@ export default function SetupForm() {
 																type
 															)
 														}
-														className={`px-4 py-3 rounded-lg border-2 transition-all font-medium ${
+														className={`px-4 py-3 rounded-lg border-2 transition-all font-medium cursor-pointer${
 															formData.interviewType ===
 															type
 																? "border-blue-500 bg-blue-50 text-blue-700"
@@ -309,7 +306,8 @@ export default function SetupForm() {
 									<div className="flex justify-end mt-8">
 										<button
 											onClick={handleNext}
-											className="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center space-x-2"
+											disabled={formData.interviewName === ""}
+											className={`px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center space-x-2 ${formData.interviewName==="" ? "cursor-not-allowed opacity-50" :""}`}
 										>
 											<span>Next</span>
 											<FaArrowRight className="w-4 h-4" />
@@ -346,7 +344,7 @@ export default function SetupForm() {
 													)
 												}
 												placeholder="e.g. Software Engineer"
-												className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+												className={`w-full px-4 py-3 border ${formData.role!==""? "border-gray-300" : "border-red-500"}  rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
 											/>
 										</div>
 
@@ -370,7 +368,7 @@ export default function SetupForm() {
 																type
 															)
 														}
-														className={`px-4 py-3 rounded-lg border-2 transition-all font-medium ${
+														className={`px-4 py-3 rounded-lg border-2 transition-all font-medium cursor-pointer${
 															formData.experienceLevel ===
 															type
 																? "border-blue-500 bg-blue-50 text-blue-700"
@@ -397,7 +395,7 @@ export default function SetupForm() {
 													)
 												}
 												placeholder="e.g. Tech Innovations Inc"
-												className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+												className={`w-full px-4 py-3 border ${formData.companyName!==""? "border-gray-300" : "border-red-500"} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
 											/>
 										</div>
 
@@ -417,7 +415,7 @@ export default function SetupForm() {
 												}
 												placeholder="Describe the company's mission, values, and culture"
 												rows={4}
-												className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+												className={`w-full px-4 py-3 border ${formData.companyDescription!==""? "border-gray-300" : "border-red-500"} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none`}
 											/>
 										</div>
 
@@ -435,7 +433,7 @@ export default function SetupForm() {
 												}
 												placeholder="Paste or describe the role, responsibilities, and requirements"
 												rows={6}
-												className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+												className={`w-full px-4 py-3 border ${formData.jobDescription!==""? "border-gray-300" : "border-red-500"} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none`}
 											/>
 										</div>
 									</div>
@@ -450,7 +448,8 @@ export default function SetupForm() {
 										</button>
 										<button
 											onClick={handleNext}
-											className="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center space-x-2"
+											disabled={(formData.jobDescription==="") || (formData.companyDescription==="") || (formData.companyName==="") || (formData.role==="")}
+											className={`px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center space-x-2 ${((formData.jobDescription==="") || (formData.companyDescription==="") || (formData.companyName==="") || (formData.role===""))? "cursor-not-allowed opacity-50" :""}`}
 										>
 											<span>Next</span>
 											<FaArrowRight className="w-4 h-4" />
@@ -479,7 +478,7 @@ export default function SetupForm() {
 
 											{!formData.resume ? (
 												<div
-													className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all ${
+													className={`relative border-2 border-dashed border-red-500 rounded-lg p-8 text-center transition-all ${
 														drag
 															? "border-blue-500 bg-blue-50"
 															: "border-gray-300 hover:border-gray-400"
@@ -568,7 +567,7 @@ export default function SetupForm() {
 												}
 												placeholder="e.g. Data Structures, System Design, Leadership"
 												rows={4}
-												className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+												className={`w-full px-4 py-3 border ${formData.focusAt!==""? "border-gray-300" : "border-red-500"} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none`}
 											/>
 										</div>
 									</div>
@@ -583,7 +582,8 @@ export default function SetupForm() {
 										</button>
 										<button
 											onClick={handleSubmit}
-											className="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+											disabled={(formData.focusAt==="") || (!formData.resume)}
+											className={`px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors ${((formData.focusAt==="") || (!formData.resume)) ? "cursor-not-allowed opacity-50" :""}`}
 										>
 											Start Interview
 										</button>
@@ -594,7 +594,6 @@ export default function SetupForm() {
 					</div>
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 }
