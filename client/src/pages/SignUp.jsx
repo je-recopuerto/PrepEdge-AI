@@ -29,6 +29,7 @@ export default function SignUp() {
 		message: "",
 		type: "success",
 	});
+	const [passwordStrength, setPasswordStrength] = useState("");
 
 	const navigate = useNavigate();
 
@@ -48,6 +49,21 @@ export default function SignUp() {
 		if (value === "") return "empty";
 		if (value.length < 6) return "invalid";
 		return "valid";
+	};
+
+	const calculatePasswordStrength = (value) => {
+		let strength = "Weak";
+		let strengthScore = 0;
+
+		if (value.length >= 6) strengthScore++;
+		if (/[A-Z]/.test(value)) strengthScore++;
+		if (/[0-9]/.test(value)) strengthScore++;
+		if (/[^A-Za-z0-9]/.test(value)) strengthScore++;
+
+		if (strengthScore >= 4) strength = "Strong";
+		else if (strengthScore >= 2) strength = "Medium";
+
+		return strength;
 	};
 
 	const handleNameChange = (value) => {
@@ -72,6 +88,7 @@ export default function SignUp() {
 			...prev,
 			password: validatePassword(value),
 		}));
+		setPasswordStrength(calculatePasswordStrength(value));
 	};
 
 	const getRingColor = (fieldValidation) => {
@@ -175,6 +192,19 @@ export default function SignUp() {
 		}
 	};
 
+	// Get the form element
+	const form = document.getElementById("signupForm");
+
+	if (form) {
+		form.addEventListener("submit", (e) => {
+			e.preventDefault(); // stop reload and 404
+
+		
+
+			// Call Firebase signup function here
+		});
+	}
+
 	return (
 		<div className="min-h-screen bg-gray-50 min-w-screen">
 			{toast.show && (
@@ -196,7 +226,7 @@ export default function SignUp() {
 
 						<form
 							className="space-y-6"
-							onSubmit={(e) => e.preventDefault()}
+							onSubmit={handleEmailSignUp}
 						>
 							<div>
 								<label
@@ -305,6 +335,19 @@ export default function SignUp() {
 								{validation.password === "empty" && (
 									<p className="mt-1 text-sm text-orange-600">
 										Password is required
+									</p>
+								)}
+								{password && validation.password !== "empty" && (
+									<p
+										className={`mt-1 text-sm ${
+											passwordStrength === "Weak"
+												? "text-red-600"
+												: passwordStrength === "Medium"
+												? "text-yellow-600"
+												: "text-green-600"
+										}`}
+									>
+										Password strength: {passwordStrength}
 									</p>
 								)}
 							</div>
