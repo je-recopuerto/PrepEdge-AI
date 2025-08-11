@@ -30,6 +30,7 @@ export default function SignUp() {
 		message: "",
 		type: "success",
 	});
+	const [passwordStrength, setPasswordStrength] = useState("");
 
 	const navigate = useNavigate();
 
@@ -49,6 +50,21 @@ export default function SignUp() {
 		if (value === "") return "empty";
 		if (value.length < 6) return "invalid";
 		return "valid";
+	};
+
+	const calculatePasswordStrength = (value) => {
+		let strength = "Weak";
+		let strengthScore = 0;
+
+		if (value.length >= 6) strengthScore++;
+		if (/[A-Z]/.test(value)) strengthScore++;
+		if (/[0-9]/.test(value)) strengthScore++;
+		if (/[^A-Za-z0-9]/.test(value)) strengthScore++;
+
+		if (strengthScore >= 4) strength = "Strong";
+		else if (strengthScore >= 2) strength = "Medium";
+
+		return strength;
 	};
 
 	const handleNameChange = (value) => {
@@ -73,6 +89,7 @@ export default function SignUp() {
 			...prev,
 			password: validatePassword(value),
 		}));
+		setPasswordStrength(calculatePasswordStrength(value));
 	};
 
 	const getRingColor = (fieldValidation) => {
@@ -126,7 +143,7 @@ export default function SignUp() {
 
 			const idToken = await userCredential.user.getIdToken();
 			await axios.post(
-				`${import.meta.env.VITE_API_URL}/api/auth/register`,
+				`${import.meta.env.VITE_API_URL}/api/auth/SignUp`,
 				{},
 				{
 					headers: {
@@ -176,6 +193,23 @@ export default function SignUp() {
 		}
 	};
 
+	// Get the form element
+	const form = document.getElementById("signupForm");
+
+	if (form) {
+		form.addEventListener("submit", (e) => {
+			e.preventDefault(); // stop reload and 404
+
+			// Get form values
+			const email = form.elements.email.value;
+			const password = form.elements.password.value;
+
+			console.log("Email:", email, "Password:", password);
+
+			// Call Firebase signup function here
+		});
+	}
+
 	return (
 		<div className="min-h-screen bg-gray-50 min-w-screen">
 			<Header />
@@ -197,6 +231,7 @@ export default function SignUp() {
 						</div>
 
 						<form
+							id="signupForm"
 							className="space-y-6"
 							onSubmit={(e) => e.preventDefault()}
 						>
@@ -307,6 +342,19 @@ export default function SignUp() {
 								{validation.password === "empty" && (
 									<p className="mt-1 text-sm text-orange-600">
 										Password is required
+									</p>
+								)}
+								{password && validation.password !== "empty" && (
+									<p
+										className={`mt-1 text-sm ${
+											passwordStrength === "Weak"
+												? "text-red-600"
+												: passwordStrength === "Medium"
+												? "text-yellow-600"
+												: "text-green-600"
+										}`}
+									>
+										Password strength: {passwordStrength}
 									</p>
 								)}
 							</div>
