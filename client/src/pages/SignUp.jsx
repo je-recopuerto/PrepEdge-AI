@@ -10,9 +10,11 @@ import {
 	createUserWithEmailAndPassword,
 	updateProfile,
 } from "../firebase";
+import { GithubAuthProvider } from "firebase/auth";
 import axios from "axios";
 
 export default function SignUp() {
+	const githubProvider = new GithubAuthProvider();
 	const { user, setUser } = useAuth();
 
 	const [name, setName] = useState("");
@@ -163,6 +165,7 @@ export default function SignUp() {
 		}
 	};
 
+	//for google
 	const handleGoogleLogin = async () => {
 		try {
 			const result = await signInWithPopup(auth, googleProvider);
@@ -192,18 +195,38 @@ export default function SignUp() {
 		}
 	};
 
-	// Get the form element
-	const form = document.getElementById("signupForm");
+	//for Github
+	const handleGithub = async () => {
+		try {
+			const result = await signInWithPopup(auth, githubProvider);
+			const credential = GithubAuthProvider.credentialFromResult(result);
+			const token = credential.accessToken;
 
-	if (form) {
-		form.addEventListener("submit", (e) => {
-			e.preventDefault(); // stop reload and 404
+			const idToken = await result.user.getIdToken();
+			await axios.post(
+				`${import.meta.env.VITE_API_URL}/api/auth/register`,
+				{},
+				{
+					headers: {
+						Authorization: `Bearer ${idToken}`,
+					},
+				}
+			);
 
-		
+			setUser(result.user); // Set the authenticated user
+			showToast("Successfully signed in with GitHub!", "success");
 
-			// Call Firebase signup function here
-		});
-	}
+			setTimeout(() => {
+				navigate("/");
+			}, 2000);
+		} catch (error) {
+			console.error("GitHub login failed:", error);
+			// showToast(error.message || "GitHub login failed", "error");
+			setTimeout(() => {
+				navigate("/");
+			}, 2000);
+		}
+	};
 
 	return (
 		<div className="min-h-screen bg-gray-50 min-w-screen">
@@ -374,7 +397,9 @@ export default function SignUp() {
 							</div>
 
 							<div className="mt-6 grid grid-cols-2 gap-3">
-								<button className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+								<button
+									onClick={handleGithub}
+									className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
 									<FaGithub className="w-4 h-4 mr-2" />
 									Github
 								</button>
