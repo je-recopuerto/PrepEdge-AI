@@ -174,12 +174,13 @@ export default function Login() {
 			setTimeout(() => {
 				navigate("/");
 			}, 2000);
-		} catch (error) {
-			console.error("GitHub login failed:", error);
-			setTimeout(() => {
-				navigate("/");
-			}, 2000);
-		}
+		} catch (err) {
+	+      const message =
+	+        err?.code === "auth/account-exists-with-different-credential"
+	+          ? "An account already exists with the same email using a different sign-in method. Please log in with that provider."
+	+          : err?.message || "An error occurred during GitHub login";
+	+      showToast(message, "error");
+	+    }
 	};
 
 	return (
