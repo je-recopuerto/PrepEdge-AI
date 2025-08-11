@@ -143,7 +143,7 @@ export default function SignUp() {
 
 			const idToken = await userCredential.user.getIdToken();
 			await axios.post(
-				`${import.meta.env.VITE_API_URL}/api/auth/SignUp`,
+				`${import.meta.env.VITE_API_URL}/api/auth/register`,
 				{},
 				{
 					headers: {
@@ -200,11 +200,7 @@ export default function SignUp() {
 		form.addEventListener("submit", (e) => {
 			e.preventDefault(); // stop reload and 404
 
-			// Get form values
-			const email = form.elements.email.value;
-			const password = form.elements.password.value;
-
-			console.log("Email:", email, "Password:", password);
+		
 
 			// Call Firebase signup function here
 		});
@@ -231,9 +227,8 @@ export default function SignUp() {
 						</div>
 
 						<form
-							id="signupForm"
 							className="space-y-6"
-							onSubmit={(e) => e.preventDefault()}
+							onSubmit={handleEmailSignUp}
 						>
 							<div>
 								<label
