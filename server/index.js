@@ -55,10 +55,6 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
 // Routing
 import authRoutes from "./routes/authRoutes.js";
 import interviewRoutes from "./routes/interviewRoutes.js";
