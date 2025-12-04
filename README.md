@@ -119,7 +119,6 @@
 <h3><samp>Abhinav Mishra – <a href="https://github.com/CoderUzumaki">@CoderUzumaki</a></samp></h3>
 
 ---
-
 <h2 id='license'> 7. License 📄 </h2>
 <p>
   This project is licensed under the <a href="./LICENSE">MIT License</a>.  
