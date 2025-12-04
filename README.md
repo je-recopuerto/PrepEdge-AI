@@ -121,7 +121,6 @@
 ---
 
 <h2 id='license'> 7. License 📄 </h2>
-
 <p>
   This project is licensed under the <a href="./LICENSE">MIT License</a>.  
   <br>
